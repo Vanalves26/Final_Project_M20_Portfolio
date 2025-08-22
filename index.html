@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Van Orgânicos - Produtos Orgânicos Frescos</title>
+	<link rel="stylesheet" href="styles.css">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+	<header class="header">
+		<div class="container">
+			<div class="header-content">
+				<div class="logo">
+					<i class="fas fa-leaf"></i>
+					<h1>Van Orgânicos</h1>
+				</div>
+				<nav class="nav">
+					<a href="#produtos" class="nav-link">Produtos</a>
+					<a href="#sobre" class="nav-link">Sobre</a>
+					<a href="#contato" class="nav-link">Contato</a>
+				</nav>
+				<div class="auth-buttons" id="authButtons">
+					<button class="btn btn-outline" id="loginBtn">Entrar</button>
+					<button class="btn btn-primary" id="registerBtn">Cadastrar</button>
+				</div>
+				<div class="user-info" id="userInfo" style="display: none;">
+					<span id="userName"></span>
+					<button class="btn btn-outline" id="logoutBtn">Sair</button>
+				</div>
+				<div class="cart-icon" id="cartIcon">
+					<i class="fas fa-shopping-cart"></i>
+					<span class="cart-count" id="cartCount">0</span>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main class="main">
+		<section class="hero">
+			<div class="container">
+				<div class="hero-content">
+					<h2>Produtos Orgânicos Frescos</h2>
+					<p>Descubra o sabor autêntico dos alimentos orgânicos cultivados com amor e respeito à natureza.</p>
+					<a href="#produtos" class="btn btn-primary">Ver Produtos</a>
+				</div>
+			</div>
+		</section>
+
+		<section id="produtos" class="products">
+			<div class="container">
+				<h2 class="section-title">Nossos Produtos</h2>
+				<div class="products-grid" id="productsGrid"></div>
+			</div>
+		</section>
+
+		<section id="sobre" class="about">
+			<div class="container">
+				<div class="about-content">
+					<div class="about-text">
+						<h2>Sobre o Van Orgânicos</h2>
+						<p>Somos uma empresa comprometida em oferecer produtos orgânicos de alta qualidade, cultivados de forma sustentável e responsável. Nossa missão é conectar você aos melhores produtores orgânicos da região.</p>
+						<div class="features">
+							<div class="feature">
+								<i class="fas fa-seedling"></i>
+								<h3>100% Orgânico</h3>
+								<p>Produtos certificados sem agrotóxicos</p>
+							</div>
+							<div class="feature">
+								<i class="fas fa-truck"></i>
+								<h3>Entrega Rápida</h3>
+								<p>Entrega em até 24h na sua região</p>
+							</div>
+							<div class="feature">
+								<i class="fas fa-heart"></i>
+								<h3>Qualidade Garantida</h3>
+								<p>Produtos frescos e selecionados</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id="contato" class="contact">
+			<div class="container">
+				<h2 class="section-title">Entre em Contato</h2>
+				<div class="contact-content">
+					<div class="contact-info">
+						<div class="contact-item">
+							<i class="fas fa-phone"></i>
+							<p>(11) 99999-9999</p>
+						</div>
+						<div class="contact-item">
+							<i class="fas fa-envelope"></i>
+							<p>contato@vanorganicos.com</p>
+						</div>
+						<div class="contact-item">
+							<i class="fas fa-map-marker-alt"></i>
+							<p>Rua das Flores, 123 - São Paulo, SP</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<div class="cart-sidebar" id="cartSidebar">
+		<div class="cart-header">
+			<h3>Seu Carrinho</h3>
+			<button class="close-cart" id="closeCart"><i class="fas fa-times"></i></button>
+		</div>
+		<div class="cart-items" id="cartItems"></div>
+		<div class="cart-footer">
+			<div class="cart-total">
+				<span>Total:</span>
+				<span id="cartTotal">R$ 0,00</span>
+			</div>
+			<button class="btn btn-primary btn-full" id="checkoutBtn">Finalizar Compra</button>
+			<button class="btn btn-secondary btn-full" id="clearCartBtn">Limpar Carrinho</button>
+		</div>
+	</div>
+	<div class="cart-overlay" id="cartOverlay"></div>
+
+	<div class="modal" id="paymentModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>Finalizar Compra</h3>
+				<button class="close-modal" id="closePaymentModal"><i class="fas fa-times"></i></button>
+			</div>
+			<div class="modal-body">
+				<form id="paymentForm">
+					<div class="form-group">
+						<label for="cardName">Nome no Cartão</label>
+						<input type="text" id="cardName" required>
+					</div>
+					<div class="form-group">
+						<label for="cardNumber">Número do Cartão</label>
+						<input type="text" id="cardNumber" maxlength="19" required>
+					</div>
+					<div class="form-row">
+						<div class="form-group">
+							<label for="cardExpiry">Validade (MM/AA)</label>
+							<input type="text" id="cardExpiry" maxlength="5" placeholder="12/25" required>
+						</div>
+						<div class="form-group">
+							<label for="cardCvv">CVV</label>
+							<input type="text" id="cardCvv" maxlength="3" required>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="phone">Telefone para SMS</label>
+						<input type="tel" id="phone" placeholder="(11) 99999-9999" required>
+					</div>
+					<div class="order-summary">
+						<h4>Resumo do Pedido</h4>
+						<div id="orderSummary"></div>
+						<div class="order-total">
+							<strong>Total: <span id="orderTotal">R$ 0,00</span></strong>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-primary btn-full">Confirmar Pagamento</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal" id="successModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>Compra Realizada com Sucesso!</h3>
+			</div>
+			<div class="modal-body">
+				<div class="success-content">
+					<i class="fas fa-check-circle success-icon"></i>
+					<p>Seu pedido foi processado com sucesso!</p>
+					<p>Você receberá uma confirmação por SMS em breve.</p>
+					<div class="order-details" id="successOrderDetails"></div>
+				</div>
+				<button class="btn btn-primary btn-full" id="continueShoppingBtn">Continuar Comprando</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal de Login -->
+	<div class="modal" id="loginModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>Entrar</h3>
+				<button class="close-modal" id="closeLoginModal"><i class="fas fa-times"></i></button>
+			</div>
+			<div class="modal-body">
+				<form id="loginForm">
+					<div class="form-group">
+						<label for="loginEmail">Email</label>
+						<input type="email" id="loginEmail" required>
+					</div>
+					<div class="form-group">
+						<label for="loginPassword">Senha</label>
+						<input type="password" id="loginPassword" required>
+					</div>
+					<div class="form-error" id="loginError"></div>
+					<button type="submit" class="btn btn-primary btn-full">Entrar</button>
+				</form>
+				<div class="form-footer">
+					<p>Não tem uma conta? <a href="#" id="showRegisterModal">Cadastre-se</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal de Registro -->
+	<div class="modal" id="registerModal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3>Cadastrar</h3>
+				<button class="close-modal" id="closeRegisterModal"><i class="fas fa-times"></i></button>
+			</div>
+			<div class="modal-body">
+				<form id="registerForm">
+					<div class="form-group">
+						<label for="registerName">Nome Completo</label>
+						<input type="text" id="registerName" required>
+					</div>
+					<div class="form-group">
+						<label for="registerEmail">Email</label>
+						<input type="email" id="registerEmail" required>
+					</div>
+					<div class="form-group">
+						<label for="registerPassword">Senha</label>
+						<input type="password" id="registerPassword" minlength="6" required>
+					</div>
+					<div class="form-group">
+						<label for="registerConfirmPassword">Confirmar Senha</label>
+						<input type="password" id="registerConfirmPassword" minlength="6" required>
+					</div>
+					<div class="form-error" id="registerError"></div>
+					<button type="submit" class="btn btn-primary btn-full">Cadastrar</button>
+				</form>
+				<div class="form-footer">
+					<p>Já tem uma conta? <a href="#" id="showLoginModal">Entrar</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="footer">
+		<div class="container">
+			<div class="footer-content">
+				<div class="footer-section">
+					<h4>Van Orgânicos</h4>
+					<p>Produtos orgânicos frescos e de qualidade para sua família.</p>
+				</div>
+				<div class="footer-section">
+					<h4>Links Úteis</h4>
+					<ul>
+						<li><a href="#produtos">Produtos</a></li>
+						<li><a href="#sobre">Sobre</a></li>
+						<li><a href="#contato">Contato</a></li>
+					</ul>
+				</div>
+				<div class="footer-section">
+					<h4>Redes Sociais</h4>
+					<div class="social-links">
+						<a href="#"><i class="fab fa-facebook"></i></a>
+						<a href="#"><i class="fab fa-instagram"></i></a>
+						<a href="#"><i class="fab fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="footer-bottom">
+				<p>&copy; 2024 Van Orgânicos. Todos os direitos reservados.</p>
+			</div>
+		</div>
+	</footer>
+
+	<script src="auth.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
